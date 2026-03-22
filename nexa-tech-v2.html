@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexa Tech — Your Ground Team in China</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#080808;--surface:#141414;--surface2:#1c1c1c;
+  --border:rgba(255,255,255,0.07);--border-light:rgba(255,255,255,0.12);
+  --white:#f5f3ee;--muted:rgba(245,243,238,0.45);
+  --accent:#c8a96e;--accent-dim:rgba(200,169,110,0.15);--accent-glow:rgba(200,169,110,0.06);
+  --green:#4caf82;--green-dim:rgba(76,175,130,0.12);
+  --red:#dc503c;--red-dim:rgba(220,80,60,0.12);
+  --amber:#e8a83a;--amber-dim:rgba(232,168,58,0.12);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--black)}::-webkit-scrollbar-thumb{background:var(--border-light);border-radius:2px}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:0.4;pointer-events:none;z-index:1000}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 3rem;transition:background 0.4s,backdrop-filter 0.4s}
+nav.scrolled{background:rgba(8,8,8,0.88);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-mark{width:32px;height:32px;background:var(--white);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;color:var(--black);font-weight:400;letter-spacing:-0.05em}
+.nav-wordmark{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--white);letter-spacing:0.04em}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{background:var(--accent);color:var(--black);border:none;padding:0.6rem 1.4rem;border-radius:100px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:opacity 0.2s,transform 0.15s;letter-spacing:0.02em}
+.nav-cta:hover{opacity:0.88;transform:translateY(-1px)}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 60%,rgba(200,169,110,0.08) 0%,transparent 70%),radial-gradient(ellipse 40% 30% at 20% 80%,rgba(76,175,130,0.04) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,black 0%,transparent 75%)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);border:0.5px solid rgba(200,169,110,0.3);padding:0.4rem 1rem;border-radius:100px;margin-bottom:2.5rem;opacity:0;transform:translateY(16px);animation:fadeUp 0.8s 0.2s forwards}
+.hero-eyebrow::before{content:'';width:5px;height:5px;background:var(--accent);border-radius:50%}
+.hero-h1{font-family:var(--serif);font-size:clamp(3.5rem,8vw,7.5rem);font-weight:300;line-height:1.05;letter-spacing:-0.01em;margin-bottom:1.5rem;opacity:0;transform:translateY(20px);animation:fadeUp 1s 0.4s forwards}
+.hero-h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:17px;color:var(--muted);max-width:520px;line-height:1.7;margin-bottom:3rem;opacity:0;transform:translateY(20px);animation:fadeUp 0.9s 0.6s forwards}
+.hero-actions{display:flex;gap:1rem;align-items:center;justify-content:center;opacity:0;transform:translateY(20px);animation:fadeUp 0.9s 0.8s forwards;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:var(--black);border:none;padding:0.85rem 2rem;border-radius:100px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;letter-spacing:0.02em}
+.btn-primary:hover{opacity:0.85;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--white);border:0.5px solid var(--border-light);padding:0.85rem 2rem;border-radius:100px;font-family:var(--sans);font-size:14px;font-weight:400;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;letter-spacing:0.02em}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;opacity:0;animation:fadeUp 1s 1.4s forwards}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:0.4}50%{opacity:1}}
+.particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;width:1px;height:1px;background:var(--accent);border-radius:50%;opacity:0;animation:floatP linear infinite}
+@keyframes floatP{0%{transform:translateY(100vh);opacity:0}10%{opacity:0.4}90%{opacity:0.2}100%{transform:translateY(-10vh) translateX(40px);opacity:0}}
+
+/* MARQUEE */
+.marquee-wrap{overflow:hidden;border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);padding:1.2rem 0;background:var(--surface)}
+.marquee-track{display:flex;gap:3rem;animation:marqueeScroll 30s linear infinite;white-space:nowrap;width:max-content}
+.marquee-item{font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:1.5rem}
+.marquee-dot{width:3px;height:3px;background:var(--accent);border-radius:50%;display:inline-block;flex-shrink:0}
+@keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* STATS */
+.stats-strip{display:flex;justify-content:center;border-top:0.5px solid var(--border);background:var(--surface)}
+.stat-item{flex:1;max-width:240px;text-align:center;padding:2.2rem 1.5rem;border-right:0.5px solid var(--border);opacity:0;transform:translateY(10px);transition:all 0.5s}
+.stat-item:last-child{border-right:none}
+.stat-item.visible{opacity:1;transform:translateY(0)}
+.stat-num{font-family:var(--serif);font-size:2.5rem;font-weight:300;color:var(--accent);line-height:1;margin-bottom:0.3rem}
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase}
+
+/* SECTIONS */
+.sec{padding:7rem 3rem;max-width:1200px;margin:0 auto}
+.section-label{font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem}
+.section-h2{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.8rem);font-weight:300;line-height:1.15;margin-bottom:1.2rem}
+.section-h2 em{font-style:italic;color:var(--accent)}
+.section-sub{font-size:16px;color:var(--muted);max-width:520px;line-height:1.7;margin-bottom:4rem}
+
+/* PROBLEMS */
+.problems-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
+.problems-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:0.5px solid var(--border);border-radius:16px;overflow:hidden}
+.problem-card{background:var(--surface);padding:2.2rem;opacity:0;transform:translateY(16px);transition:opacity 0.5s,transform 0.5s,background 0.3s}
+.problem-card.visible{opacity:1;transform:translateY(0)}
+.problem-card:hover{background:var(--surface2)}
+.problem-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:1rem}
+.problem-title{font-family:var(--serif);font-size:1.3rem;font-weight:400;margin-bottom:0.75rem}
+.problem-desc{font-size:13.5px;color:var(--muted);line-height:1.65}
+
+/* SERVICES */
+.services-intro{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:5rem}
+.services-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:0.5px solid var(--border);border-radius:16px;overflow:hidden}
+.service-item{background:var(--surface);padding:1.8rem 2.5rem;display:grid;grid-template-columns:48px 1fr auto;gap:1.5rem;align-items:center;opacity:0;transform:translateX(-16px);transition:opacity 0.5s,transform 0.5s,background 0.2s}
+.service-item.visible{opacity:1;transform:translateX(0)}
+.service-item:hover{background:var(--surface2)}
+.service-icon{width:44px;height:44px;background:var(--accent-dim);border:0.5px solid rgba(200,169,110,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.service-name{font-size:15px;font-weight:500;margin-bottom:3px}
+.service-desc{font-size:13px;color:var(--muted);line-height:1.55}
+.service-badge{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;padding:4px 10px;border-radius:100px;white-space:nowrap;flex-shrink:0}
+.badge-core{background:var(--green-dim);color:var(--green);border:0.5px solid rgba(76,175,130,0.2)}
+.badge-pro{background:var(--accent-dim);color:var(--accent);border:0.5px solid rgba(200,169,110,0.2)}
+.badge-elite{background:rgba(180,130,200,0.12);color:#c07be0;border:0.5px solid rgba(180,130,200,0.2)}
+
+/* SHIPPING CALC */
+.calc-wrapper{background:var(--surface);border:0.5px solid var(--border-light);border-radius:20px;overflow:hidden}
+.calc-header{padding:1.2rem 2.5rem;border-bottom:0.5px solid var(--border);background:var(--surface2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.calc-body{display:grid;grid-template-columns:1fr 1.4fr;min-height:500px}
+.calc-inputs{padding:2rem 2.5rem;border-right:0.5px solid var(--border)}
+.input-group{margin-bottom:1.3rem}
+.input-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;display:block}
+.input-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.calc-input{width:100%;background:var(--black);border:0.5px solid var(--border-light);border-radius:8px;padding:0.65rem 1rem;color:var(--white);font-family:var(--mono);font-size:14px;outline:none;transition:border-color 0.2s}
+.calc-input:focus{border-color:var(--accent)}
+.calc-input::placeholder{color:rgba(245,243,238,0.2)}
+.dest-select{width:100%;background:var(--black);border:0.5px solid var(--border-light);border-radius:8px;padding:0.65rem 1rem;color:var(--white);font-family:var(--sans);font-size:13.5px;outline:none;transition:border-color 0.2s;cursor:pointer}
+.dest-select:focus{border-color:var(--accent)}
+.dest-select option{background:var(--surface2)}
+.calc-btn{width:100%;background:var(--accent);color:var(--black);border:none;padding:0.85rem;border-radius:8px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.02em}
+.calc-btn:hover{opacity:0.85;transform:translateY(-1px)}
+.calc-results-pane{padding:2rem 2.5rem;overflow-y:auto;max-height:600px}
+.calc-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:400px;color:var(--muted);text-align:center;gap:1rem;padding:2rem}
+.result-card{background:var(--black);border:0.5px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:8px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;opacity:0;transform:translateX(12px)}
+.result-card.show{animation:slideIn 0.4s forwards}
+@keyframes slideIn{to{opacity:1;transform:translateX(0)}}
+.result-card.rec{border-color:rgba(200,169,110,0.4);background:var(--accent-glow)}
+.result-name{font-size:14px;font-weight:500}
+.result-eta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
+.result-price{font-family:var(--mono);font-size:14px;color:var(--accent);text-align:right;font-weight:400}
+.result-tracking{font-size:10px;color:var(--muted);text-align:right;margin-top:2px}
+.rec-badge{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.06em;color:var(--accent);background:var(--accent-dim);border:0.5px solid rgba(200,169,110,0.3);padding:2px 7px;border-radius:100px;margin-left:6px;vertical-align:middle}
+.results-title{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.flag-card{border-radius:8px;padding:0.85rem 1rem;margin-top:8px;font-size:12.5px;line-height:1.55;border:0.5px solid}
+.flag-red{background:var(--red-dim);border-color:rgba(220,80,60,0.25);color:var(--white)}
+.flag-amber{background:var(--amber-dim);border-color:rgba(232,168,58,0.25);color:var(--white)}
+.flag-green{background:var(--green-dim);border-color:rgba(76,175,130,0.25);color:var(--white)}
+.flag-title{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;margin-bottom:4px}
+.flag-title.r{color:var(--red)}.flag-title.a{color:var(--amber)}.flag-title.g{color:var(--green)}
+
+/* CUSTOMS TABS */
+.ctab{background:transparent;color:var(--muted);border:0.5px solid var(--border-light);padding:0.5rem 1rem;border-radius:100px;font-family:var(--sans);font-size:12px;cursor:pointer;transition:all 0.2s;letter-spacing:0.02em}
+.ctab:hover{border-color:var(--accent);color:var(--accent)}
+.ctab.active{background:var(--accent-dim);border-color:rgba(200,169,110,0.4);color:var(--accent)}
+
+/* CUSTOMS PANEL */
+.cpanel-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.cpanel-box{background:var(--surface);padding:2rem}
+.cpanel-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}
+.cpanel-val{font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--white);margin-bottom:0.3rem}
+.cpanel-sub{font-size:12.5px;color:var(--muted);line-height:1.55}
+.tripwire-list{display:flex;flex-direction:column;gap:8px;margin-top:1rem}
+.tripwire{padding:0.75rem 1rem;border-radius:8px;font-size:13px;border:0.5px solid;line-height:1.5;color:var(--white)}
+.tw-red{background:var(--red-dim);border-color:rgba(220,80,60,0.2)}
+.tw-amber{background:var(--amber-dim);border-color:rgba(232,168,58,0.2)}
+.tw-green{background:var(--green-dim);border-color:rgba(76,175,130,0.2)}
+.tw-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;display:block;margin-bottom:3px}
+.tag-r{color:var(--red)}.tag-a{color:var(--amber)}.tag-g{color:var(--green)}
+
+/* HS CODES TABLE */
+.hs-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.hs-table th{text-align:left;padding:8px 12px;background:var(--surface2);font-weight:500;font-size:11px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;border-bottom:0.5px solid var(--border)}
+.hs-table td{padding:8px 12px;border-bottom:0.5px solid var(--border);vertical-align:middle}
+.hs-table tr:last-child td{border-bottom:none}
+.hs-table tr:hover td{background:rgba(255,255,255,0.02)}
+
+/* FACTORY DIRECTORY */
+.dir-card{background:var(--surface);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color 0.2s,background 0.2s;cursor:default}
+.dir-card:hover{border-color:var(--border-light);background:var(--surface2)}
+.dir-card-header{padding:1.5rem 1.8rem;border-bottom:0.5px solid var(--border);position:relative}
+.dir-city{font-family:var(--serif);font-size:1.5rem;font-weight:400;margin-bottom:2px;color:var(--white)}
+.dir-province{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem}
+.dir-specialties{display:flex;flex-wrap:wrap;gap:5px;margin-top:0.6rem}
+.dir-tag{font-size:10.5px;padding:3px 9px;border-radius:100px;background:var(--accent-dim);color:var(--accent);border:0.5px solid rgba(200,169,110,0.2);font-family:var(--mono);letter-spacing:0.04em}
+.dir-card-body{padding:1.5rem 1.8rem}
+.dir-market{margin-bottom:1rem}
+.dir-market-name{font-size:13.5px;font-weight:500;margin-bottom:3px;color:var(--white)}
+.dir-market-desc{font-size:12.5px;color:var(--muted);line-height:1.55}
+.dir-tips{display:flex;flex-direction:column;gap:6px;padding-top:1rem;border-top:0.5px solid var(--border)}
+.dir-tip{font-size:12px;color:var(--muted);display:flex;align-items:flex-start;gap:6px;line-height:1.5}
+.dir-tip::before{content:'→';color:var(--accent);flex-shrink:0;font-family:var(--mono)}
+.dir-badge{position:absolute;top:1.2rem;right:1.5rem;font-size:10px;padding:3px 9px;border-radius:100px;font-family:var(--mono);letter-spacing:0.06em}
+.db-nexa{background:var(--accent-dim);color:var(--accent);border:0.5px solid rgba(200,169,110,0.25)}
+.db-visit{background:var(--green-dim);color:var(--green);border:0.5px solid rgba(76,175,130,0.2)}
+.hidden-dir{display:none!important}
+
+/* QC SECTION */
+.qc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
+.qc-visual{background:var(--surface);border:0.5px solid var(--border);border-radius:16px;padding:3rem;position:relative;overflow:hidden}
+.qc-visual::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(200,169,110,0.06) 0%,transparent 70%);pointer-events:none}
+.qc-step{display:grid;grid-template-columns:40px 1fr;gap:1rem;padding:1.5rem 0;border-bottom:0.5px solid var(--border);opacity:0;transform:translateX(-12px);transition:opacity 0.4s,transform 0.4s}
+.qc-step:last-child{border-bottom:none}
+.qc-step.visible{opacity:1;transform:translateX(0)}
+.step-num{width:36px;height:36px;background:var(--accent-dim);border:0.5px solid rgba(200,169,110,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--accent);flex-shrink:0}
+.step-name{font-size:14px;font-weight:500;margin-bottom:3px}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.55}
+.qc-callout{background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:2rem;border-left:2px solid var(--accent)}
+.callout-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+.callout-text{font-family:var(--serif);font-size:1.4rem;font-weight:300;line-height:1.4}
+.qc-features{background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:2rem}
+.qc-feat{display:flex;align-items:flex-start;gap:0.75rem;padding:0.6rem 0;font-size:14px;color:var(--muted)}
+.qc-feat::before{content:'→';color:var(--accent);flex-shrink:0;font-family:var(--mono)}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:0.5px solid var(--border);border-radius:16px;overflow:hidden}
+.plan-card{background:var(--surface);padding:2.5rem 2rem;position:relative;opacity:0;transform:translateY(20px);transition:opacity 0.5s,transform 0.5s,background 0.3s}
+.plan-card.visible{opacity:1;transform:translateY(0)}
+.plan-card:hover,.plan-card.featured{background:var(--surface2)}
+.plan-featured-badge{position:absolute;top:0;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;background:var(--accent);color:var(--black);padding:4px 14px;border-radius:0 0 8px 8px}
+.plan-name{font-family:var(--serif);font-size:1.3rem;font-weight:400;margin-bottom:0.4rem;margin-top:1rem}
+.plan-price{font-family:var(--mono);font-size:2.2rem;font-weight:300;color:var(--accent);line-height:1;margin-bottom:0.3rem}
+.plan-price span{font-size:14px;color:var(--muted)}
+.plan-desc{font-size:12.5px;color:var(--muted);margin-bottom:1.5rem;line-height:1.5}
+.plan-divider{height:0.5px;background:var(--border);margin-bottom:1.5rem}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem}
+.plan-features li{font-size:12.5px;color:var(--muted);display:flex;align-items:flex-start;gap:0.5rem;line-height:1.4}
+.plan-features li.on{color:var(--white)}
+.plan-features li::before{content:'✕';color:rgba(255,255,255,0.15);font-size:10px;flex-shrink:0;margin-top:2px}
+.plan-features li.on::before{content:'✓';color:var(--green)}
+.plan-btn{width:100%;background:transparent;color:var(--accent);border:0.5px solid rgba(200,169,110,0.4);padding:0.75rem;border-radius:8px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.plan-btn:hover{background:var(--accent-dim)}
+.plan-card.featured .plan-btn{background:var(--accent);color:var(--black);border-color:var(--accent)}
+
+/* FTZ */
+.ftz-strip{background:var(--surface);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);padding:5rem 3rem}
+.ftz-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.ftz-facts{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.ftz-fact{padding:1.2rem;background:var(--black);border-radius:10px;border:0.5px solid var(--border)}
+.ftz-fact-label{font-size:11px;color:var(--muted);letter-spacing:0.06em;margin-bottom:4px;text-transform:uppercase}
+.ftz-fact-value{font-family:var(--serif);font-size:1.1rem;color:var(--white)}
+.ftz-perk{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem;background:var(--black);border-radius:10px;border:0.5px solid var(--border);transition:border-color 0.2s;margin-bottom:0.8rem}
+.ftz-perk:hover{border-color:var(--border-light)}
+.ftz-perk-title{font-size:13.5px;font-weight:500;margin-bottom:2px}
+.ftz-perk-desc{font-size:12.5px;color:var(--muted);line-height:1.5}
+
+/* CTA */
+#cta{padding:10rem 3rem;max-width:1200px;margin:0 auto;text-align:center;position:relative}
+#cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(200,169,110,0.06) 0%,transparent 70%);pointer-events:none}
+.cta-h2{font-family:var(--serif);font-size:clamp(2.5rem,5vw,5rem);font-weight:300;line-height:1.1;margin-bottom:1.5rem}
+.cta-h2 em{font-style:italic;color:var(--accent)}
+.cta-sub{font-size:16px;color:var(--muted);margin-bottom:3rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+.cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.cta-note{font-size:12px;color:var(--muted)}
+
+/* FOOTER */
+footer{background:var(--surface);border-top:0.5px solid var(--border);padding:4rem 3rem 2.5rem}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:0.5px solid var(--border);margin-bottom:2rem}
+.footer-col-title{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.footer-links a{font-size:14px;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--white)}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.footer-legal{font-size:12px;color:var(--muted)}
+.footer-legal a{color:var(--muted);text-decoration:none}
+.footer-legal a:hover{color:var(--white)}
+
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}.nav-links{display:none}
+  .sec{padding:4rem 1.5rem}
+  .problems-header,.services-intro,.qc-grid,.ftz-inner{grid-template-columns:1fr;gap:2rem}
+  .problems-grid{grid-template-columns:1fr}
+  .calc-body{grid-template-columns:1fr}.calc-inputs{border-right:none;border-bottom:0.5px solid var(--border)}
+  .pricing-grid{grid-template-columns:1fr 1fr}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:2rem}
+  .cpanel-grid{grid-template-columns:1fr}
+  .dir-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">nx</div>
+    <span class="nav-wordmark">Nexa Tech</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#calculator">Shipping</a></li>
+    <li><a href="#customs">Customs</a></li>
+    <li><a href="#directory">Factory Map</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Get Started</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="particles" id="particles"></div>
+  <div class="hero-eyebrow">Shanghai Free Trade Zone · 上海奈科萨科技商贸有限公司</div>
+  <h1 class="hero-h1">Your team<br><em>on the ground</em><br>in China</h1>
+  <p class="hero-sub">QC, shipping intelligence, customs guidance, and factory access — from inside the Shanghai FTZ. Built for serious dropshippers.</p>
+  <div class="hero-actions">
+    <a href="#calculator" class="btn-primary">Try shipping engine</a>
+    <a href="#directory" class="btn-ghost">Explore factory map</a>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>Shipping Alternatives</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Live QC Video</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Factory Visits</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Shanghai Free Trade Zone</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Customs Intelligence</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>HS Classification</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Canton Fair Scouting</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>De Minimis Tracking</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Mandarin Escalation</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Shipping Alternatives</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Live QC Video</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Factory Visits</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Shanghai Free Trade Zone</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Customs Intelligence</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>HS Classification</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Canton Fair Scouting</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>De Minimis Tracking</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Mandarin Escalation</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item"><div class="stat-num">$0</div><div class="stat-label">US de minimis from China (Aug 2025)</div></div>
+  <div class="stat-item"><div class="stat-num">30%</div><div class="stat-label">China–US tariff baseline (2026)</div></div>
+  <div class="stat-item"><div class="stat-num">6–14</div><div class="stat-label">Days via YunExpress to US</div></div>
+  <div class="stat-item"><div class="stat-num">24h</div><div class="stat-label">QC report turnaround</div></div>
+  <div class="stat-item"><div class="stat-num">20+</div><div class="stat-label">Factory cities mapped</div></div>
+</div>
+
+<!-- PROBLEMS -->
+<section class="sec" id="problems">
+  <div class="problems-header">
+    <div>
+      <div class="section-label">The problem</div>
+      <h2 class="section-h2">Dropshipping from China is broken.<br><em>We fix it.</em></h2>
+    </div>
+    <p style="font-size:16px;color:var(--muted);line-height:1.7">Every dropshipper hitting scale runs into the same invisible wall. Here's what stops them — and how Nexa removes it entirely.</p>
+  </div>
+  <div class="problems-grid">
+    <div class="problem-card"><div class="problem-num">01</div><div class="problem-title">Shipping unpredictability</div><div class="problem-desc">ePacket averages 22+ days. Labels created, never scanned. De minimis gone. Customers expect Amazon speed — and you can't deliver it alone.</div></div>
+    <div class="problem-card"><div class="problem-num">02</div><div class="problem-title">Zero product visibility</div><div class="problem-desc">Supplier photos lie. Quality varies batch-to-batch. You're shipping blind, absorbing returns that kill your margins and erode brand trust.</div></div>
+    <div class="problem-card"><div class="problem-num">03</div><div class="problem-title">The language wall</div><div class="problem-desc">Wrong variants. Missed escalations. Disputes that drag for weeks. No leverage when you're 8 time zones away with no Mandarin.</div></div>
+    <div class="problem-card"><div class="problem-num">04</div><div class="problem-title">Customs chaos in 2026</div><div class="problem-desc">US de minimis gone. EU €3 flat duty from July 2026. UK phasing out £135 relief. Brazil $50 threshold. Customers get surprise bills at the door.</div></div>
+    <div class="problem-card"><div class="problem-num">05</div><div class="problem-title">Escalation dead ends</div><div class="problem-desc">When shipments stall, suppliers ghost. Couriers have no local contacts. You have no leverage. Chargebacks arrive instead of answers.</div></div>
+    <div class="problem-card"><div class="problem-num">06</div><div class="problem-title">Factory opacity</div><div class="problem-desc">Real factories vs trading companies. Unverifiable certifications. You need someone physically walking the factory floor on your behalf.</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="services-intro">
+    <div>
+      <div class="section-label">What we do</div>
+      <h2 class="section-h2">Your complete <em>China operations</em> layer</h2>
+      <p class="section-sub">One subscription replaces the team you can't afford to build. QC, shipping intelligence, escalation, customs guidance — from inside Shanghai's FTZ.</p>
+    </div>
+  </div>
+  <div class="services-list">
+    <div class="service-item"><div class="service-icon">⚙</div><div class="service-content"><div class="service-name">Shipping intelligence engine</div><div class="service-desc">Enter dimensions, weight, destination. Get ranked carriers with real cost estimates, ETA ranges, duty warnings, de minimis flags, and Nexa's recommendation — not just a rate table.</div></div><span class="service-badge badge-core">All plans</span></div>
+    <div class="service-item"><div class="service-icon">🛃</div><div class="service-content"><div class="service-name">Customs & tariff intelligence</div><div class="service-desc">Country-by-country de minimis thresholds, duty rates, HS code guidance, labeling requirements, and the specific tripwires that catch dropshippers at the border. Updated for 2026 rule changes.</div></div><span class="service-badge badge-core">All plans</span></div>
+    <div class="service-item"><div class="service-icon">🔍</div><div class="service-content"><div class="service-name">QC photo & video inspection</div><div class="service-desc">Our team physically inspects your product against a structured checklist. Photos and video delivered to your dashboard within 24 hours — before it ships.</div></div><span class="service-badge badge-core">All plans</span></div>
+    <div class="service-item"><div class="service-icon">📹</div><div class="service-content"><div class="service-name">Live video QC call</div><div class="service-desc">Real-time video inspection. You direct our team via WhatsApp or Zoom. Open the box with you watching. No one else in dropshipping offers this.</div></div><span class="service-badge badge-pro">Pro & above</span></div>
+    <div class="service-item"><div class="service-icon">🏷️</div><div class="service-content"><div class="service-name">Label procurement & dispatch</div><div class="service-desc">We obtain the label, negotiate rates, confirm dispatch, and give you one clean tracking number with status that actually updates.</div></div><span class="service-badge badge-core">All plans</span></div>
+    <div class="service-item"><div class="service-icon">📡</div><div class="service-content"><div class="service-name">Proactive delay escalation</div><div class="service-desc">When a shipment stalls, we contact the courier or factory in Mandarin — from inside China. You get a status update, not silence and a chargeback.</div></div><span class="service-badge badge-core">All plans</span></div>
+    <div class="service-item"><div class="service-icon">🏭</div><div class="service-content"><div class="service-name">Factory visits & verification</div><div class="service-desc">We visit factories, check certifications, meet production managers, photograph facilities, and return a Nexa trust score. Real factory vs trading company identified.</div></div><span class="service-badge badge-elite">Elite</span></div>
+    <div class="service-item"><div class="service-icon">🎪</div><div class="service-content"><div class="service-name">Canton Fair & trade fair scouting</div><div class="service-desc">We attend on your behalf, scout your category, photograph samples, and return supplier contacts. Canton Fair twice yearly, Global Sources, Yiwu — all covered.</div></div><span class="service-badge badge-elite">Elite</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SHIPPING ENGINE ═══════════════════════ -->
+<section class="sec" id="calculator">
+  <div class="section-label">Shipping intelligence engine</div>
+  <h2 class="section-h2">Not a rate table. <em>A real engine.</em></h2>
+  <p class="section-sub">Enter package details. Get ranked carriers with estimated landed cost, ETA, duty warnings, de minimis flags, and country-specific customs alerts — all in one result.</p>
+
+  <div class="calc-wrapper">
+    <div class="calc-header">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 6px var(--green)"></div>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.08em">NEXA SHIPPING + CUSTOMS ENGINE v2.0</span>
+      </div>
+      <span style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.04em;text-align:right">Estimates only · Always consult a licensed broker for binding rulings</span>
+    </div>
+    <div class="calc-body">
+      <div class="calc-inputs">
+        <div class="input-group">
+          <label class="input-label">Dimensions (cm) — L × W × H</label>
+          <div class="input-row">
+            <input class="calc-input" type="number" placeholder="L" id="si_l" min="1">
+            <input class="calc-input" type="number" placeholder="W" id="si_w" min="1">
+            <input class="calc-input" type="number" placeholder="H" id="si_h" min="1">
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Actual weight (grams)</label>
+          <input class="calc-input" type="number" placeholder="e.g. 450" id="si_wt" style="width:100%">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Declared value (USD)</label>
+          <input class="calc-input" type="number" placeholder="e.g. 35.00" id="si_val" style="width:100%">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Product category</label>
+          <select class="dest-select" id="si_cat">
+            <option value="">Select category…</option>
+            <option value="clothing">Clothing & Apparel</option>
+            <option value="electronics">Electronics</option>
+            <option value="jewelry">Jewelry & Watches</option>
+            <option value="toys">Toys & Games</option>
+            <option value="beauty">Beauty & Cosmetics</option>
+            <option value="homeware">Home & Garden</option>
+            <option value="sports">Sports & Outdoor</option>
+            <option value="tools">Tools & Hardware</option>
+            <option value="food">Food & Supplements</option>
+            <option value="lithium">Lithium Battery Products</option>
+            <option value="other">Other / General</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Destination country</label>
+          <select class="dest-select" id="si_dest">
+            <option value="">Select country…</option>
+            <option value="US">🇺🇸 United States</option>
+            <option value="UK">🇬🇧 United Kingdom</option>
+            <option value="CA">🇨🇦 Canada</option>
+            <option value="AU">🇦🇺 Australia</option>
+            <option value="EU">🇪🇺 EU (Germany/France/NL…)</option>
+            <option value="BR">🇧🇷 Brazil</option>
+            <option value="MX">🇲🇽 Mexico</option>
+            <option value="JP">🇯🇵 Japan</option>
+            <option value="SG">🇸🇬 Singapore</option>
+            <option value="AE">🇦🇪 UAE</option>
+            <option value="ZA">🇿🇦 South Africa</option>
+            <option value="IN">🇮🇳 India</option>
+          </select>
+        </div>
+        <button class="calc-btn" onclick="runEngine()">Calculate options + customs flags →</button>
+        <p style="font-size:10.5px;color:var(--muted);margin-top:0.75rem;line-height:1.6;opacity:0.7">⚠ Estimates only. Carrier rates, duties, and taxes vary. Verify with your carrier and consult a licensed customs broker for binding rulings. Nexa Tech accepts no liability for decisions based on these estimates. Tariff information reflects publicly available data as of March 2026 and is subject to change.</p>
+      </div>
+      <div id="si_results" class="calc-results-pane">
+        <div class="calc-placeholder">
+          <div style="font-size:2.5rem;opacity:0.25">⚙</div>
+          <p style="font-size:14px;line-height:1.6;max-width:260px;text-align:center">Enter package details and destination to see carriers, costs, and customs intelligence</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CUSTOMS INTELLIGENCE ═══════════════════════ -->
+<section class="sec" style="padding-top:0" id="customs">
+  <div class="section-label">Customs & trade intelligence</div>
+  <h2 class="section-h2">Every country. <em>Every rule that bites.</em></h2>
+  <p class="section-sub" style="margin-bottom:2.5rem">The complete breakdown of what happens at the border — de minimis thresholds, duty rates, HS codes, labeling rules, and 2026 changes that will catch most dropshippers off guard.</p>
+
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem" id="ctabs">
+    <button class="ctab active" onclick="showC('US',this)">🇺🇸 USA</button>
+    <button class="ctab" onclick="showC('UK',this)">🇬🇧 UK</button>
+    <button class="ctab" onclick="showC('EU',this)">🇪🇺 EU</button>
+    <button class="ctab" onclick="showC('CA',this)">🇨🇦 Canada</button>
+    <button class="ctab" onclick="showC('AU',this)">🇦🇺 Australia</button>
+    <button class="ctab" onclick="showC('BR',this)">🇧🇷 Brazil</button>
+    <button class="ctab" onclick="showC('JP',this)">🇯🇵 Japan</button>
+    <button class="ctab" onclick="showC('AE',this)">🇦🇪 UAE</button>
+    <button class="ctab" onclick="showC('MX',this)">🇲🇽 Mexico</button>
+  </div>
+  <div id="cpanel" style="background:var(--surface);border:0.5px solid var(--border-light);border-radius:16px;overflow:hidden;margin-bottom:3rem"></div>
+
+  <!-- HS CODE PRIMER -->
+  <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:16px;overflow:hidden">
+    <div style="padding:2rem 2.5rem;border-bottom:0.5px solid var(--border)">
+      <div class="section-label">HS code primer</div>
+      <h3 style="font-family:var(--serif);font-size:1.7rem;font-weight:300;margin-bottom:0.5rem">Classify correctly. <em>Or pay the price.</em></h3>
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.65;max-width:720px">In 2024, Ford was billed $365M for misclassifying vans. A viral beach tote brand bumped duties 30% by misclassifying a zinc keychain as stainless steel. Misclassification means delays, penalties, and retroactive duties — and <em>you</em> are the importer of record, not your supplier.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)">
+      <div style="background:var(--surface);padding:2rem">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:0.12em;margin-bottom:1rem">HOW IT'S STRUCTURED</div>
+        <div style="font-family:var(--mono);font-size:1.5rem;color:var(--white);margin-bottom:1rem;letter-spacing:0.04em">6101.20.10</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="font-size:12px;color:var(--muted);display:flex;gap:10px"><span style="color:var(--accent);font-family:var(--mono);min-width:24px;font-size:13px">61</span><div><strong style="color:var(--white);font-size:11px;font-weight:500">Chapter</strong><br>Knitted clothing</div></div>
+          <div style="font-size:12px;color:var(--muted);display:flex;gap:10px"><span style="color:var(--accent);font-family:var(--mono);min-width:24px;font-size:13px">01</span><div><strong style="color:var(--white);font-size:11px;font-weight:500">Heading</strong><br>Men's overcoats</div></div>
+          <div style="font-size:12px;color:var(--muted);display:flex;gap:10px"><span style="color:var(--accent);font-family:var(--mono);min-width:24px;font-size:13px">20</span><div><strong style="color:var(--white);font-size:11px;font-weight:500">Subheading</strong><br>Of cotton</div></div>
+          <div style="font-size:12px;color:var(--muted);display:flex;gap:10px"><span style="color:var(--accent);font-family:var(--mono);min-width:24px;font-size:13px">10</span><div><strong style="color:var(--white);font-size:11px;font-weight:500">National digits</strong><br>Country-specific</div></div>
+        </div>
+        <p style="font-size:11.5px;color:var(--muted);margin-top:1rem;line-height:1.55;border-top:0.5px solid var(--border);padding-top:0.75rem">First 6 digits are globally harmonised. Beyond that varies by country — US uses 10 digits (HTS), EU/UK 8–10, China 13 digits.</p>
+      </div>
+      <div style="background:var(--surface);padding:2rem">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:0.12em;margin-bottom:1rem">BIGGEST MISTAKES</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:12.5px;color:var(--muted);padding:0.6rem 0.75rem;border-left:2px solid var(--red);background:var(--red-dim);border-radius:0 6px 6px 0;line-height:1.5">Copying supplier's code — you are legally responsible, not them</div>
+          <div style="font-size:12.5px;color:var(--muted);padding:0.6rem 0.75rem;border-left:2px solid var(--red);background:var(--red-dim);border-radius:0 6px 6px 0;line-height:1.5">Using marketing names ("smart device") instead of material + function</div>
+          <div style="font-size:12.5px;color:var(--muted);padding:0.6rem 0.75rem;border-left:2px solid var(--amber);background:var(--amber-dim);border-radius:0 6px 6px 0;line-height:1.5">Ignoring country-specific digits beyond first 6</div>
+          <div style="font-size:12.5px;color:var(--muted);padding:0.6rem 0.75rem;border-left:2px solid var(--amber);background:var(--amber-dim);border-radius:0 6px 6px 0;line-height:1.5">Not updating when product materials change batch-to-batch</div>
+          <div style="font-size:12.5px;color:var(--muted);padding:0.6rem 0.75rem;border-left:2px solid var(--amber);background:var(--amber-dim);border-radius:0 6px 6px 0;line-height:1.5">Classifying smartwatch as "watch" (should be telecom device 8517.62)</div>
+        </div>
+      </div>
+      <div style="background:var(--surface);padding:2rem">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--green);letter-spacing:0.12em;margin-bottom:1rem">COMMON PRODUCT HS CODES</div>
+        <table class="hs-table">
+          <thead><tr><th>Product</th><th>HS 6-digit</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--muted)">USB cables</td><td style="font-family:var(--mono);color:var(--accent)">8544.42</td></tr>
+            <tr><td style="color:var(--muted)">Phone cases (plastic)</td><td style="font-family:var(--mono);color:var(--accent)">3926.90</td></tr>
+            <tr><td style="color:var(--muted)">LED strips</td><td style="font-family:var(--mono);color:var(--accent)">9405.40</td></tr>
+            <tr><td style="color:var(--muted)">Cotton t-shirts</td><td style="font-family:var(--mono);color:var(--accent)">6109.10</td></tr>
+            <tr><td style="color:var(--muted)">Bluetooth speakers</td><td style="font-family:var(--mono);color:var(--accent)">8518.22</td></tr>
+            <tr><td style="color:var(--muted)">Plush toys</td><td style="font-family:var(--mono);color:var(--accent)">9503.00</td></tr>
+            <tr><td style="color:var(--muted)">Fitness trackers</td><td style="font-family:var(--mono);color:var(--accent)">8517.62</td></tr>
+            <tr><td style="color:var(--muted)">Silicone jewelry</td><td style="font-family:var(--mono);color:var(--accent)">7117.19</td></tr>
+            <tr><td style="color:var(--muted)">Yoga mats</td><td style="font-family:var(--mono);color:var(--accent)">9506.91</td></tr>
+            <tr><td style="color:var(--muted)">Power banks</td><td style="font-family:var(--mono);color:var(--accent)">8507.60</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="padding:1.2rem 2.5rem;background:rgba(200,169,110,0.03);border-top:0.5px solid var(--border)">
+      <p style="font-size:11.5px;color:var(--muted);line-height:1.6"><strong style="color:var(--white)">⚠ Disclaimer:</strong> HS codes are illustrative starting points based on publicly available trade data. The correct code for your product depends on its exact materials, function, and construction. You — as importer of record — are legally responsible. Always verify with a licensed customs broker or your country's official tariff database. Official resources: <a href="https://hts.usitc.gov" style="color:var(--accent)" target="_blank">hts.usitc.gov</a> (US) · <a href="https://trade-tariff.service.gov.uk" style="color:var(--accent)" target="_blank">trade-tariff.service.gov.uk</a> (UK) · <a href="https://cbsa-asfc.gc.ca" style="color:var(--accent)" target="_blank">cbsa-asfc.gc.ca</a> (CA). Nexa Tech provides this for educational purposes only and accepts no liability for customs decisions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FACTORY DIRECTORY ═══════════════════════ -->
+<section class="sec" style="padding-top:0" id="directory">
+  <div class="section-label">Factory city directory</div>
+  <h2 class="section-h2">Where China <em>actually makes things.</em></h2>
+  <p class="section-sub" style="margin-bottom:1rem">The insider guide most foreigners never find. Every major product category, the exact city and district, specific markets to visit, and what to watch out for. <strong style="color:var(--white);font-weight:500">20 cities. 50+ product categories.</strong></p>
+  <p style="font-size:12.5px;color:var(--muted);margin-bottom:2.5rem;padding:0.75rem 1rem 0.75rem 1.2rem;background:var(--surface);border-radius:8px;border-left:2px solid var(--accent);max-width:680px;line-height:1.65">Nexa can accompany you to any of these cities — factory visits, translation, supplier verification, and negotiation support. Available on Business & Elite plans, or as a standalone add-on.</p>
+
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem" id="dtabs">
+    <button class="ctab active" onclick="filterD('all',this)">All</button>
+    <button class="ctab" onclick="filterD('electronics',this)">Electronics</button>
+    <button class="ctab" onclick="filterD('clothing',this)">Clothing</button>
+    <button class="ctab" onclick="filterD('homeware',this)">Home & Decor</button>
+    <button class="ctab" onclick="filterD('toys',this)">Toys</button>
+    <button class="ctab" onclick="filterD('beauty',this)">Beauty</button>
+    <button class="ctab" onclick="filterD('jewelry',this)">Jewelry</button>
+    <button class="ctab" onclick="filterD('industrial',this)">Tools</button>
+    <button class="ctab" onclick="filterD('optical',this)">Optical</button>
+  </div>
+  <div id="dir_grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px"></div>
+</section>
+
+<!-- QC SECTION -->
+<section class="sec" style="padding-top:0" id="qc">
+  <div class="section-label">Quality control</div>
+  <h2 class="section-h2">See it before <em>it ships.</em></h2>
+  <p class="section-sub" style="margin-bottom:3rem">Photo, video, and live inspection — so you stop shipping blind and stop absorbing costly returns.</p>
+  <div class="qc-grid">
+    <div class="qc-visual">
+      <div class="section-label" style="margin-bottom:1.5rem">How it works</div>
+      <div>
+        <div class="qc-step"><div class="step-num">01</div><div><div class="step-name">Submit inspection request</div><div class="step-desc">From your dashboard. Choose photo report, video report, or live video call.</div></div></div>
+        <div class="qc-step"><div class="step-num">02</div><div><div class="step-name">Nexa team visits supplier</div><div class="step-desc">We physically go to the factory or warehouse, open the package, and run through your specification checklist.</div></div></div>
+        <div class="qc-step"><div class="step-num">03</div><div><div class="step-name">Report within 24 hours</div><div class="step-desc">Photos + video uploaded to your dashboard. Pass or flag — clear decision with visual evidence you can share with customers if needed.</div></div></div>
+        <div class="qc-step"><div class="step-num">04</div><div><div class="step-name">Approve or escalate</div><div class="step-desc">Approve and we confirm dispatch. Flag an issue and we negotiate with the supplier in Mandarin on your behalf.</div></div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1.5rem">
+      <div class="qc-callout"><div class="callout-tag">The differentiator</div><div class="callout-text">"Live video QC — you direct the inspection in real time. Nobody else in the dropshipping space offers this."</div></div>
+      <div class="qc-features">
+        <div class="section-label" style="margin-bottom:0.75rem">Inspection covers</div>
+        <div class="qc-feat">Correct product, variant, colour, and size</div>
+        <div class="qc-feat">Packaging condition and completeness</div>
+        <div class="qc-feat">Build quality, stitching, finish defects</div>
+        <div class="qc-feat">Labeling, barcodes, country of origin marking</div>
+        <div class="qc-feat">Quantity spot-check against invoice</div>
+        <div class="qc-feat">Your custom checklist items</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" style="padding-top:0" id="pricing">
+  <div style="text-align:center;margin-bottom:4rem">
+    <div class="section-label" style="justify-content:center;display:flex">Pricing</div>
+    <h2 class="section-h2" style="text-align:center">One subscription.<br><em>Your full China team.</em></h2>
+    <p style="font-size:16px;color:var(--muted);max-width:440px;margin:0 auto;line-height:1.7">No setup fee. Cancel anytime. Volume thresholds unlock premium services automatically.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="plan-card"><div class="plan-name">Starter</div><div class="plan-price">$49<span>/mo</span></div><div class="plan-desc">Solo dropshippers testing the waters</div><div class="plan-divider"></div><ul class="plan-features"><li class="on">Shipping engine (unlimited)</li><li class="on">Customs intelligence hub</li><li class="on">5 QC photo reports/mo</li><li class="on">Label procurement (5 orders)</li><li class="on">Basic delay alerts</li><li>Live video QC</li><li>Escalation service</li><li>Factory visits</li></ul><button class="plan-btn">Get started</button></div>
+    <div class="plan-card featured"><div class="plan-featured-badge">Most popular</div><div class="plan-name">Pro</div><div class="plan-price">$149<span>/mo</span></div><div class="plan-desc">Growing stores, 50–200 orders/mo</div><div class="plan-divider"></div><ul class="plan-features"><li class="on">Everything in Starter</li><li class="on">20 QC reports + 5 video calls</li><li class="on">Unlimited label procurement</li><li class="on">Full escalation service</li><li class="on">Branded packaging coordination</li><li class="on">Priority Mandarin support</li><li>Factory visits</li></ul><button class="plan-btn">Start Pro plan</button></div>
+    <div class="plan-card"><div class="plan-name">Business</div><div class="plan-price">$349<span>/mo</span></div><div class="plan-desc">Established brands, 200–500 orders/mo</div><div class="plan-divider"></div><ul class="plan-features"><li class="on">Everything in Pro</li><li class="on">Unlimited QC + video calls</li><li class="on">Supplier vetting (2/mo)</li><li class="on">Monthly sourcing report</li><li class="on">Dedicated account manager</li><li class="on">1 free add-on/mo</li><li>Trade fair representation</li></ul><button class="plan-btn">Get Business</button></div>
+    <div class="plan-card"><div class="plan-name">Elite</div><div class="plan-price">$799<span>/mo</span></div><div class="plan-desc">High-volume brands, 500+ orders/mo</div><div class="plan-divider"></div><ul class="plan-features"><li class="on">Everything in Business</li><li class="on">Factory visits (you pay travel)</li><li class="on">Trade fair scouting</li><li class="on">Unlimited supplier vetting</li><li class="on">Customs advisory per shipment</li><li class="on">White-label reporting</li><li class="on">4h SLA response time</li></ul><button class="plan-btn">Go Elite</button></div>
+  </div>
+</section>
+
+<!-- FTZ -->
+<div class="ftz-strip">
+  <div class="ftz-inner">
+    <div>
+      <div class="section-label">Our advantage</div>
+      <h2 class="section-h2">Registered in the<br><em>Shanghai FTZ</em></h2>
+      <p style="font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:2rem">The Shanghai Free Trade Zone is China's premier hub for cross-border trade. Our registration here is operational leverage — not just a credential — for every order we handle.</p>
+      <div class="ftz-facts">
+        <div class="ftz-fact"><div class="ftz-fact-label">Established</div><div class="ftz-fact-value">2013 — China's first FTZ</div></div>
+        <div class="ftz-fact"><div class="ftz-fact-label">Address</div><div class="ftz-fact-value">盘安路 501号, Jiading</div></div>
+        <div class="ftz-fact"><div class="ftz-fact-label">Port access</div><div class="ftz-fact-value">Yangshan Deep Water Port</div></div>
+        <div class="ftz-fact"><div class="ftz-fact-label">Registration</div><div class="ftz-fact-value">上海奈科萨科技商贸</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ftz-perk"><div style="font-size:16px;flex-shrink:0">💰</div><div><div class="ftz-perk-title">Reduced duties on re-export</div><div class="ftz-perk-desc">FTZ goods don't trigger mainland duties until they enter the domestic market — lowering costs for consolidation and re-export.</div></div></div>
+      <div class="ftz-perk"><div style="font-size:16px;flex-shrink:0">🚀</div><div><div class="ftz-perk-title">Priority customs lanes</div><div class="ftz-perk-desc">FTZ registration unlocks streamlined export processing via Pudong Airport and Yangshan Port — one of the world's busiest.</div></div></div>
+      <div class="ftz-perk"><div style="font-size:16px;flex-shrink:0">💳</div><div><div class="ftz-perk-title">Cross-border payment flexibility</div><div class="ftz-perk-desc">Accept USD, EUR, GBP — pay suppliers in RMB. FTZ allows freer currency conversion than mainland entities.</div></div></div>
+      <div class="ftz-perk"><div style="font-size:16px;flex-shrink:0">🛡️</div><div><div class="ftz-perk-title">IP enforcement access</div><div class="ftz-perk-desc">Dedicated FTZ IP office — we help clients document and escalate counterfeit supplier activity through official channels.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-h2">Stop shipping blind.<br><em>Start shipping smart.</em></div>
+  <p class="cta-sub">Join the dropshippers who have Nexa as their permanent team on the ground in China.</p>
+  <div class="cta-actions">
+    <a href="#calculator" class="btn-primary">Try the shipping engine</a>
+    <a href="#pricing" class="btn-ghost">View all plans</a>
+  </div>
+  <p class="cta-note">No setup fee · Cancel anytime · 14-day money-back guarantee</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div style="font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:0.5rem;letter-spacing:0.04em">Nexa Tech</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6">Your boots-on-the-ground partner<br>in China. QC, shipping, customs,<br>and sourcing from the Shanghai FTZ.</p>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.8;letter-spacing:0.02em">上海市嘉定区盘安路 501号<br>2号楼 3层 J<br>Shanghai, China 201800<br><br>上海奈科萨科技商贸有限公司</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#calculator">Shipping engine</a></li>
+        <li><a href="#customs">Customs intelligence</a></li>
+        <li><a href="#qc">QC inspections</a></li>
+        <li><a href="#services">Escalation</a></li>
+        <li><a href="#directory">Factory directory</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Plans</div>
+      <ul class="footer-links">
+        <li><a href="#pricing">Starter — $49/mo</a></li>
+        <li><a href="#pricing">Pro — $149/mo</a></li>
+        <li><a href="#pricing">Business — $349/mo</a></li>
+        <li><a href="#pricing">Elite — $799/mo</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Nexa</a></li>
+        <li><a href="#">Shanghai FTZ</a></li>
+        <li><a href="#">Contact us</a></li>
+        <li><a href="#">WeChat support</a></li>
+        <li><a href="#">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-legal">© 2026 上海奈科萨科技商贸有限公司 · All rights reserved</span>
+    <span class="footer-legal"><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Customs Disclaimer</a></span>
+  </div>
+</footer>
+
+<script>
+/* ── NAV ── */
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>60));
+
+/* ── PARTICLES ── */
+const pc=document.getElementById('particles');
+for(let i=0;i<18;i++){const p=document.createElement('div');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;width:${Math.random()<0.3?2:1}px;height:${Math.random()<0.3?2:1}px;animation-duration:${8+Math.random()*14}s;animation-delay:${Math.random()*10}s`;pc.appendChild(p)}
+
+/* ── OBSERVER ── */
+new IntersectionObserver((es)=>es.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*60)}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'})
+.observe && document.querySelectorAll('.stat-item,.problem-card,.service-item,.plan-card,.qc-step').forEach(el=>new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1}).observe(el));
+
+/* ═══════════════════════════════════════════════════
+   SHIPPING ENGINE DATA
+═══════════════════════════════════════════════════ */
+const CARRIERS = {
+  US:[
+    {name:'YunExpress',eta:'6–14 days',cost:'$3.20–$6.00',track:'Full E2E',rec:true,limit:30000},
+    {name:'ePacket (USPS)',eta:'12–25 days',cost:'$1.80–$3.50',track:'Full E2E',rec:false,limit:2000},
+    {name:'SF Express eParcel',eta:'7–12 days',cost:'$5.00–$9.00',track:'Premium',rec:false,limit:30000},
+    {name:'4PX Standard',eta:'14–28 days',cost:'$2.40–$4.50',track:'Moderate',rec:false,limit:30000},
+    {name:'Yanwen Economy',eta:'15–30 days',cost:'$1.60–$3.00',track:'Basic',rec:false,limit:2000},
+    {name:'DHL Express',eta:'3–6 days',cost:'$22–$55',track:'Premium',rec:false,limit:70000},
+    {name:'FedEx International',eta:'3–5 days',cost:'$25–$65',track:'Premium',rec:false,limit:68000},
+  ],
+  UK:[
+    {name:'YunExpress UK',eta:'8–16 days',cost:'$4.00–$7.00',track:'Full E2E',rec:true,limit:30000},
+    {name:'Yanwen Special Line',eta:'7–14 days',cost:'$2.80–$5.00',track:'Moderate',rec:false,limit:2000},
+    {name:'SF Express eParcel',eta:'8–14 days',cost:'$5.50–$10.00',track:'Premium',rec:false,limit:30000},
+    {name:'DHL Express',eta:'3–5 days',cost:'$24–$58',track:'Premium',rec:false,limit:70000},
+  ],
+  CA:[
+    {name:'YunExpress CA',eta:'9–18 days',cost:'$3.80–$7.00',track:'Full E2E',rec:true,limit:30000},
+    {name:'4PX Canada Post',eta:'14–28 days',cost:'$3.00–$5.50',track:'Moderate',rec:false,limit:30000},
+    {name:'SF Express eParcel',eta:'9–16 days',cost:'$6.00–$11.00',track:'Premium',rec:false,limit:30000},
+    {name:'DHL Express',eta:'3–6 days',cost:'$24–$56',track:'Premium',rec:false,limit:70000},
+  ],
+  AU:[
+    {name:'YunExpress AU',eta:'9–18 days',cost:'$4.50–$8.00',track:'Full E2E',rec:true,limit:30000},
+    {name:'SF Express eParcel AU',eta:'8–15 days',cost:'$6.00–$11.00',track:'Premium',rec:false,limit:30000},
+    {name:'ePacket (AU Post)',eta:'12–25 days',cost:'$2.20–$4.00',track:'Moderate',rec:false,limit:2000},
+    {name:'DHL Express',eta:'4–7 days',cost:'$28–$60',track:'Premium',rec:false,limit:70000},
+  ],
+  EU:[
+    {name:'YunExpress EU',eta:'8–16 days',cost:'$3.80–$7.00',track:'Full E2E',rec:true,limit:30000},
+    {name:'Yanwen Economy EU',eta:'14–26 days',cost:'$2.60–$4.50',track:'Basic',rec:false,limit:2000},
+    {name:'SF Express eParcel',eta:'8–14 days',cost:'$5.50–$10.00',track:'Premium',rec:false,limit:30000},
+    {name:'DHL Express',eta:'3–5 days',cost:'$22–$50',track:'Premium',rec:false,limit:70000},
+  ],
+  BR:[
+    {name:'Correios Registered',eta:'20–45 days',cost:'$5.00–$9.00',track:'Moderate',rec:true,limit:30000},
+    {name:'DHL Express',eta:'5–9 days',cost:'$38–$80',track:'Premium',rec:false,limit:70000},
+  ],
+  MX:[
+    {name:'YunExpress MX',eta:'10–20 days',cost:'$4.50–$8.00',track:'Full E2E',rec:true,limit:30000},
+    {name:'4PX MX Post',eta:'14–28 days',cost:'$3.50–$6.00',track:'Moderate',rec:false,limit:30000},
+    {name:'DHL Express',eta:'3–6 days',cost:'$25–$55',track:'Premium',rec:false,limit:70000},
+  ],
+  JP:[
+    {name:'ePacket Japan',eta:'6–12 days',cost:'$3.00–$5.50',track:'Full E2E',rec:true,limit:2000},
+    {name:'SF Express Japan',eta:'5–10 days',cost:'$6.00–$12.00',track:'Premium',rec:false,limit:30000},
+    {name:'DHL Express',eta:'2–4 days',cost:'$20–$45',track:'Premium',rec:false,limit:70000},
+  ],
+  SG:[
+    {name:'ePacket Singapore',eta:'5–10 days',cost:'$2.50–$4.50',track:'Full E2E',rec:true,limit:2000},
+    {name:'SF Express SG',eta:'4–8 days',cost:'$5.00–$9.00',track:'Premium',rec:false,limit:30000},
+    {name:'DHL Express',eta:'2–3 days',cost:'$18–$40',track:'Premium',rec:false,limit:70000},
+  ],
+  AE:[
+    {name:'YunExpress UAE',eta:'7–14 days',cost:'$4.50–$8.00',track:'Full E2E',rec:true,limit:30000},
+    {name:'SF Express UAE',eta:'6–12 days',cost:'$6.00–$11.00',track:'Premium',rec:false,limit:30000},
+    {name:'DHL Express',eta:'2–4 days',cost:'$22–$48',track:'Premium',rec:false,limit:70000},
+  ],
+  ZA:[
+    {name:'YunExpress ZA',eta:'12–22 days',cost:'$5.00–$9.00',track:'Moderate',rec:true,limit:30000},
+    {name:'DHL Express',eta:'5–8 days',cost:'$30–$65',track:'Premium',rec:false,limit:70000},
+  ],
+  IN:[
+    {name:'India Post Registered',eta:'15–30 days',cost:'$3.50–$6.00',track:'Basic',rec:true,limit:2000},
+    {name:'DHL Express',eta:'3–5 days',cost:'$22–$48',track:'Premium',rec:false,limit:70000},
+  ]
+};
+
+/* Country customs data */
+const CUSTOMS={
+  US:{flag:'🇺🇸',name:'United States',deminimis:'$0 for China-origin goods',deminimis_note:'De minimis eliminated May 2025 for China/HK. All US $800 threshold ended Aug 2025.',vat:'No federal VAT/GST',duty_china:'20–45%+ (base 20% + Section 301 tariffs 0–25% by category)',duty_note:'Tariffs stack: base reciprocal tariff (20%) + Section 301 (product-specific). Electronics often lower; apparel/textiles 25%+.',label:'Country of origin marking required on ALL foreign goods per 19 USC 1304. Must be in English, visible in casual inspection.',hs_digits:'10 (HTS)',ioss:'N/A',tripwires:[
+    {type:'red',msg:'De minimis GONE for China. Every package needs proper customs declaration and duties may apply regardless of value.'},
+    {type:'red',msg:'Section 301 tariffs ON TOP of base tariffs. Mis-declaring product type or value is a federal offense.'},
+    {type:'red',msg:'TSCA compliance for chemical products. CPSC compliance for children\'s products. FDA for food/cosmetics.'},
+    {type:'amber',msg:'ISF (Importer Security Filing) required for ocean freight. File 24h before vessel loading.'},
+    {type:'amber',msg:'Some products require FCC certification before US import (electronics, radio transmitters).'},
+    {type:'green',msg:'US has no VAT — no VAT surprise at door. But state sales tax may apply separately.'},
+  ]},
+  UK:{flag:'🇬🇧',name:'United Kingdom',deminimis:'£135 (customs duty only)',deminimis_note:'VAT always applies regardless of value. £135 threshold phasing out by March 2029.',vat:'20% VAT on all imports (no threshold)',duty_china:'0–12% (product dependent)',duty_note:'UK Global Tariff applies post-Brexit. Electronics often 0%, clothing 12%, footwear varies 0–17%.',label:'Country of origin must be marked. CE marking not required post-Brexit — UKCA marking required for regulated products.',hs_digits:'10 (UK Tariff)',ioss:'UK IOSS equivalent: OSS scheme for UK sellers',tripwires:[
+    {type:'red',msg:'VAT is collected at border on ALL imports — no threshold. Use IOSS/OSS to collect at checkout or customer pays surprise at door.'},
+    {type:'red',msg:'UKCA marking required (not CE) for electronics, medical devices, toys, PPE sold in Great Britain.'},
+    {type:'amber',msg:'Northern Ireland still follows EU CE marking rules — different requirement from England/Wales/Scotland.'},
+    {type:'amber',msg:'£135 de minimis threshold expected to fall before 2029 — monitor HMRC consultations.'},
+    {type:'green',msg:'UK has a straightforward tariff database at trade-tariff.service.gov.uk — use it to verify your rates.'},
+  ]},
+  EU:{flag:'🇪🇺',name:'European Union',deminimis:'€150 (customs duty) — VAT always applies',deminimis_note:'From 1 July 2026: €150 threshold removed. €3 flat duty per consignment under interim system, then full duties.',vat:'19–25% VAT (varies by member state)',duty_china:'0–17% (product dependent)',duty_note:'EU Customs Union — single external tariff across all members. Clothing 12%, electronics often 0–3.7%, ceramics 12%.',label:'CE marking mandatory for electronics, toys, medical devices, machinery. Country of origin required.',hs_digits:'10 (CN code)',ioss:'IOSS (Import One Stop Shop) — register to collect VAT at checkout for sub-€150 shipments',tripwires:[
+    {type:'red',msg:'From July 2026: €3 minimum duty on every parcel under €150, and all shipments will eventually face full duties. Reprice now.'},
+    {type:'red',msg:'CE marking is MANDATORY for electronics, toys, PPE. Selling without it risks seizure, fines, and ban from EU market.'},
+    {type:'red',msg:'GDPR compliance for any customer data handling. Non-EU sellers need an EU representative.'},
+    {type:'amber',msg:'IOSS registration (€0 threshold for VAT) — strongly recommended. Without IOSS, customer pays VAT + handling fee at door.'},
+    {type:'amber',msg:'Some member states (FR, DE) have stricter enforcement. France has EPR packaging fees for foreign sellers.'},
+    {type:'green',msg:'EU TARIC database (ec.europa.eu/taxation_customs) shows exact duty rates by product and origin.'},
+  ]},
+  CA:{flag:'🇨🇦',name:'Canada',deminimis:'CAD $20 (tax) / CAD $150 (duty)',deminimis_note:'Very low tax threshold means most shipments trigger GST/HST. Courier shipments follow USMCA rules but China is not USMCA.',vat:'GST 5% (federal) + HST/PST varies by province (0–15% combined)',duty_china:'0–18% depending on product',duty_note:'Canada\'s MFN rates apply to China. Apparel 18%, electronics often 0%, footwear 20%.',label:'Country of origin labeling required. English AND French labeling mandatory for retail packaging.',hs_digits:'10 (Canadian Tariff)',ioss:'N/A (no IOSS)',tripwires:[
+    {type:'red',msg:'Bilingual labeling (English + French) legally required for all consumer goods sold in Canada.'},
+    {type:'red',msg:'CBSA aggressively enforces undervaluation. Audits are common and penalties are steep.'},
+    {type:'amber',msg:'Provinces have different sales tax rates — GST 5% everywhere, but HST applies in ON/NS/NB (13–15%) and QST in QC.'},
+    {type:'amber',msg:'CAD $20 tax threshold is extremely low — virtually all packages trigger GST/HST. Build this into your pricing.'},
+    {type:'green',msg:'CBSA online tariff tool at cbsa-asfc.gc.ca gives binding tariff classifications.'},
+  ]},
+  AU:{flag:'🇦🇺',name:'Australia',deminimis:'AUD $1,000 (among world\'s highest)',deminimis_note:'Under $1,000 AUD: no customs duty. BUT sellers over AUD $75,000 AUD annual turnover must register for GST and collect it at checkout.',vat:'GST 10% (collected by seller at checkout if >AUD $75k annual AU revenue)',duty_china:'0–10% (varies)',duty_note:'Most electronics 0%, clothing 5–10%. Australia generally has low tariff rates.',label:'Country of origin marking not strictly required for general goods, but strongly recommended. Must not be misleading.',hs_digits:'8 (AHECC)',ioss:'LVT (Low Value Tax) scheme — GST collected at checkout by overseas sellers over AUD 75k threshold',tripwires:[
+    {type:'red',msg:'GST registration required once you cross AUD $75,000 annual AU revenue. Collect 10% at checkout or face ABRS enforcement.'},
+    {type:'amber',msg:'Australian Consumer Law (ACL) — strict consumer protection rights. Must honor warranties and accept returns. No "all sales final."'},
+    {type:'amber',msg:'Biosecurity Act — food, seeds, plant materials, wooden items, and some products need inspection or permit. Very strictly enforced.'},
+    {type:'amber',msg:'Prohibited/restricted items list is extensive — check DAWR before shipping any food, cosmetics, or organics.'},
+    {type:'green',msg:'AUD $1,000 threshold still the world\'s highest (as of March 2026). But watch for reviews — may change.'},
+  ]},
+  BR:{flag:'🇧🇷',name:'Brazil',deminimis:'USD $50 (postal only, person-to-person)',deminimis_note:'Commercial imports effectively have $0 de minimis. All commercial packages subject to II import tax + ICMS + PIS/COFINS.',vat:'ICMS 17–25% (varies by state) + federal PIS/COFINS 9.25%',duty_china:'20% Imposto de Importação (II) baseline + product-specific rates',duty_note:'Total tax burden (tax on tax!) can reach 60–80% of declared value. ICMS is calculated on (value + II + freight) × rate.',label:'Portuguese labeling required. INMETRO certification needed for electronics and regulated goods.',hs_digits:'8 (NCM/SH)',ioss:'REMESSA CONFORME scheme for e-commerce',tripwires:[
+    {type:'red',msg:'Brazil has the most complex import tax structure in the world. "Cascading" taxes — tax is calculated on top of previous taxes. Total burden often 60–80%.'},
+    {type:'red',msg:'INMETRO certification required for electronics, toys, electrical goods. Without it: seized at customs, destroyed or returned.'},
+    {type:'red',msg:'Remessa Conforme (postal e-commerce scheme): 20% import tax + 20% ICMS. Only via accredited platforms.'},
+    {type:'red',msg:'Customs delays of 4–8 weeks are NORMAL. Packages held for inspection routinely. Never promise delivery dates to Brazilian customers.'},
+    {type:'amber',msg:'Undervaluing is extremely risky — customs officers regularly audit and compare against known market prices.'},
+    {type:'amber',msg:'Portuguese required on all labeling. Consumer protection (CDC) is very strong — returns and refunds heavily enforced.'},
+  ]},
+  JP:{flag:'🇯🇵',name:'Japan',deminimis:'¥10,000 (~USD $65)',deminimis_note:'Below ¥10,000: no duty. Consumption tax may still apply via registered sellers.',vat:'Consumption Tax 10% (8% for food)',duty_china:'0–14% depending on product',duty_note:'Japan has relatively low MFN rates. Electronics often 0%, textiles vary.',label:'Japanese language labeling required for food and some product categories. PSE mark for electronics.',hs_digits:'9 (Statistical code)',ioss:'Consumption Tax registration for overseas sellers over ¥10M annual Japan revenue',tripwires:[
+    {type:'red',msg:'PSE (Product Safety Electrical Appliance & Material) mark required for electronics. Without it: confiscated at customs.'},
+    {type:'amber',msg:'Consumption tax registration required if annual Japan sales exceed ¥10 million (~USD $67k). Growing platform for DTC.'},
+    {type:'amber',msg:'Japan Post customs delays are common for non-registered items. DHL or FedEx clears faster.'},
+    {type:'green',msg:'Japan Customs website (customs.go.jp) has English tariff lookup. Clean, reliable system.'},
+  ]},
+  AE:{flag:'🇦🇪',name:'UAE',deminimis:'AED 0 (customs on all commercial imports)',deminimis_note:'No de minimis threshold for commercial imports. Personal gifts under AED 300 exempt.',vat:'5% VAT (one of world\'s lowest)',duty_china:'5% GCC standard rate on most goods',duty_note:'Most products: flat 5% CIF duty. Exceptions: alcohol 50%, tobacco 100%, some food 0%.',label:'Arabic labeling mandatory for food, cosmetics, and many consumer goods. Country of origin required.',hs_digits:'8 (GCC Tariff)',ioss:'N/A',tripwires:[
+    {type:'red',msg:'Arabic labeling required for food, cosmetics, and consumer products. Non-compliant: seized at Dubai/Abu Dhabi customs.'},
+    {type:'red',msg:'Halal certification required for food products. Pork and alcohol have strict restrictions.'},
+    {type:'amber',msg:'ESMA (Emirates Authority for Standardisation) certification required for some electronics and regulated goods.'},
+    {type:'green',msg:'5% VAT and 5% duty is relatively simple. Dubai\'s JAFZA and Meydan FTZs offer favorable re-export options.'},
+    {type:'green',msg:'UAE is a re-export hub. Products often flow UAE → rest of GCC/Africa. Favorable for bulk consolidated shipments.'},
+  ]},
+  MX:{flag:'🇲🇽',name:'Mexico',deminimis:'USD $50 (very low)',deminimis_note:'Commercial imports over $50 require formal customs entry. USMCA only helps US/Canada origin goods — not China.',vat:'IVA 16%',duty_china:'15–35% on most goods (Mexico does not have a preferential agreement with China)',duty_note:'Mexico applies high MFN rates to Chinese goods. Clothing/textiles can hit 35%. Electronics often 15–20%.',label:'Spanish labeling required. NOM (Normas Oficiales Mexicanas) compliance for regulated categories.',hs_digits:'8 (TIGIE)',ioss:'N/A',tripwires:[
+    {type:'red',msg:'Mexico has NO free trade agreement with China. Full MFN duties apply — often 15–35%. Very high for consumer goods.'},
+    {type:'red',msg:'NOM certification required for electronics, toys, textiles, food. PROFECO enforces consumer goods standards.'},
+    {type:'amber',msg:'$50 de minimis is very low — most shipments trigger duties. Build customs costs into pricing.'},
+    {type:'amber',msg:'Customs clearance can take 5–15 days. Use a local Mexican customs broker (agente aduanal) — mandatory for many entries.'},
+  ]},
+};
+
+function runEngine(){
+  const l=+document.getElementById('si_l').value||0;
+  const w=+document.getElementById('si_w').value||0;
+  const h=+document.getElementById('si_h').value||0;
+  const wt=+document.getElementById('si_wt').value||0;
+  const val=+document.getElementById('si_val').value||0;
+  const cat=document.getElementById('si_cat').value;
+  const dest=document.getElementById('si_dest').value;
+  const R=document.getElementById('si_results');
+
+  if(!dest||!wt){R.innerHTML='<div class="calc-placeholder"><div style="font-size:2rem;color:var(--red);opacity:0.8">!</div><p style="color:var(--muted);font-size:13.5px">Please enter at least weight and destination.</p></div>';return;}
+
+  const volWt=l&&w&&h?(l*w*h)/5000:0;
+  const billWt=Math.max(wt/1000,volWt);
+  const carriers=(CARRIERS[dest]||CARRIERS['US']);
+  const cdata=CUSTOMS[dest];
+
+  let html=`<div class="results-title">Results: ${dest} · ${wt}g${l?` · ${l}×${w}×${h}cm`:''}</div>`;
+  if(volWt>wt/1000)html+=`<div style="font-family:var(--mono);font-size:10px;color:var(--amber);margin-bottom:8px;letter-spacing:0.06em">⚡ Volumetric weight (${volWt.toFixed(2)}kg) > actual weight — carriers will charge by volumetric</div>`;
+
+  carriers.forEach((c,i)=>{
+    const overLimit=wt>c.limit;
+    const rec=c.rec&&!overLimit;
+    html+=`<div class="result-card${rec?' rec':''}" style="animation-delay:${i*80}ms">
+      <div><div class="result-name">${c.name}${rec?'<span class="rec-badge">Nexa pick</span>':''}${overLimit?'<span style="font-size:10px;color:var(--red);font-family:var(--mono);margin-left:6px">Over limit</span>':''}</div>
+      <div class="result-eta">${c.eta}${c.limit===2000&&wt>2000?' — max 2kg; your package exceeds':''}</div></div>
+      <div><div class="result-price">${c.cost}</div><div class="result-tracking">⬤ ${c.track}</div></div>
+    </div>`;
+  });
+
+  // CUSTOMS FLAGS
+  html+=`<div style="margin-top:1.2rem;font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:0.1em;margin-bottom:8px">CUSTOMS INTELLIGENCE — ${dest}</div>`;
+
+  if(cdata){
+    html+=`<div class="flag-card flag-amber" style="animation-delay:400ms">
+      <div class="flag-title a">DE MINIMIS</div>
+      <strong>${cdata.deminimis}</strong><br><span style="font-size:12px;color:var(--muted)">${cdata.deminimis_note}</span>
+    </div>`;
+
+    if(val>0){
+      const cust=cdata;
+      html+=`<div class="flag-card flag-green" style="animation-delay:480ms">
+        <div class="flag-title g">DECLARED VALUE: USD $${val.toFixed(2)}</div>
+        <span style="font-size:12.5px;color:var(--muted)">Duty estimate (illustrative): ${cust.duty_china} × $${val.toFixed(2)} = see note · ${cust.duty_note}</span>
+      </div>`;
+    }
+
+    // Category-specific flags
+    const catFlags={
+      lithium:`<div class="flag-card flag-red"><div class="flag-title r">⚠ LITHIUM BATTERY RESTRICTION</div>Lithium batteries classified as dangerous goods (IATA DG). Most postal carriers (ePacket, Yanwen) will not accept. Must use approved dangerous goods courier — DHL, FedEx, or specialist. UN3481 (batteries in equipment) or UN3480 (batteries alone) labeling required.</div>`,
+      food:`<div class="flag-card flag-red"><div class="flag-title r">⚠ FOOD / SUPPLEMENT RESTRICTIONS</div>Most countries require health authority registration for food and supplements. US: FDA Prior Notice. EU: EFSA Novel Food rules. AU: DAWR biosecurity inspection. Japan: Ministry of Health registration. This category has high customs examination rates and frequent seizures.</div>`,
+      beauty:`<div class="flag-card flag-amber"><div class="flag-title a">⚠ COSMETICS REGULATIONS</div>EU: Responsible Person required, CPNP notification. US: FDA cosmetics. Australia: NICNAS/AICIS registration may be needed. Ingredients must comply with destination country's restricted substances lists.</div>`,
+      toys:`<div class="flag-card flag-amber"><div class="flag-title a">⚠ TOY SAFETY CERTIFICATION</div>EU: CE marking + EN71 testing required. US: CPSC/ASTM F963 + children\'s product certificate. UK: UKCA. Australia: mandatory toy safety standard. Without certification, toys are seized at customs.</div>`,
+      electronics:`<div class="flag-card flag-amber"><div class="flag-title a">⚠ ELECTRONICS CERTIFICATION</div>EU: CE marking. UK: UKCA. US: FCC ID (if wireless). Japan: PSE mark. Australia: RCM mark. UAE: ESMA. Certification must be in place BEFORE import. Missing marks = seizure and destruction.</div>`,
+    };
+    if(catFlags[cat])html+=catFlags[cat];
+
+    // Value-based warnings
+    if(val>=800)html+=`<div class="flag-card flag-red"><div class="flag-title r">⚠ HIGH DECLARED VALUE: $${val}</div>Formal customs entry required in most countries above their commercial import thresholds. DHL/FedEx recommended for high-value items — better insurance, faster customs release, dedicated broker support. Consider cargo insurance.</div>`;
+    else if(val>=300)html+=`<div class="flag-card flag-amber"><div class="flag-title a">MODERATE VALUE: $${val}</div>Approaching commercial thresholds in several countries. Ensure declared value is accurate and supported by invoice. Undervaluation is a customs offense.</div>`;
+
+    if(dest==='BR')html+=`<div class="flag-card flag-red"><div class="flag-title r">⚠ BRAZIL: HIGH DELAY RISK</div>Brazil customs routinely holds packages 4–8 weeks. Total tax burden (II + ICMS + PIS/COFINS) can reach 60–80% of declared value. Communicate realistic delivery expectations to Brazilian customers. Consider DHL for faster clearance.</div>`;
+  }
+
+  html+=`<div style="margin-top:1rem;padding:0.75rem 1rem;background:rgba(200,169,110,0.04);border-radius:8px;border:0.5px solid var(--border)"><p style="font-size:10.5px;color:var(--muted);line-height:1.6">⚠ <strong style="color:var(--white)">Disclaimer:</strong> All figures are illustrative estimates based on publicly available data (March 2026). Actual duties, taxes, and carrier costs vary. Tariff rates are subject to change without notice. Consult a licensed customs broker for binding advice. Nexa Tech accepts no liability for decisions made based on these estimates.</p></div>`;
+
+  R.innerHTML=html;
+  R.querySelectorAll('.result-card,.flag-card').forEach((el,i)=>{el.style.animationDelay=i*60+'ms';el.classList.add('show')});
+}
+
+['si_l','si_w','si_h','si_wt','si_val'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('keydown',e=>{if(e.key==='Enter')runEngine()})});
+
+/* ═══════════════════════════════════════════════════
+   CUSTOMS PANEL DATA
+═══════════════════════════════════════════════════ */
+function showC(code,btn){
+  document.querySelectorAll('#ctabs .ctab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const d=CUSTOMS[code];
+  if(!d){document.getElementById('cpanel').innerHTML='<p style="padding:2rem;color:var(--muted)">Data coming soon.</p>';return;}
+  const twHtml=d.tripwires.map(t=>`<div class="tripwire tw-${t.type}"><span class="tw-tag tag-${t.type[0]}">${t.type==='red'?'⚠ CRITICAL':t.type==='amber'?'⚡ WATCH OUT':'✓ HELPFUL'}</span>${t.msg}</div>`).join('');
+  document.getElementById('cpanel').innerHTML=`
+    <div style="padding:2rem 2.5rem;border-bottom:0.5px solid var(--border);background:var(--surface2)">
+      <div style="font-size:1.8rem;margin-bottom:6px">${d.flag}</div>
+      <div style="font-family:var(--serif);font-size:1.6rem;font-weight:300;color:var(--white)">${d.name}</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border)">
+      <div style="background:var(--surface);padding:1.8rem">
+        <div class="cpanel-label">De minimis threshold</div>
+        <div style="font-size:1.2rem;font-weight:500;color:var(--accent);font-family:var(--mono);margin-bottom:4px">${d.deminimis}</div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.55">${d.deminimis_note}</div>
+      </div>
+      <div style="background:var(--surface);padding:1.8rem">
+        <div class="cpanel-label">VAT / GST / Consumption Tax</div>
+        <div style="font-size:1.2rem;font-weight:500;color:var(--white);margin-bottom:4px">${d.vat}</div>
+        <div class="cpanel-label" style="margin-top:0.75rem">Import duty (China origin)</div>
+        <div style="font-size:1.2rem;font-weight:500;color:var(--white);margin-bottom:4px">${d.duty_china}</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5">${d.duty_note}</div>
+      </div>
+      <div style="background:var(--surface);padding:1.8rem">
+        <div class="cpanel-label">Labeling requirements</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6">${d.label}</div>
+        <div class="cpanel-label" style="margin-top:0.75rem">HS code digits used</div>
+        <div style="font-family:var(--mono);font-size:1.1rem;color:var(--accent)">${d.hs_digits}</div>
+      </div>
+      <div style="background:var(--surface);padding:1.8rem">
+        <div class="cpanel-label">⚠ Key tripwires & alerts</div>
+        <div class="tripwire-list">${twHtml}</div>
+      </div>
+    </div>
+    <div style="padding:1rem 2rem;background:rgba(200,169,110,0.03);border-top:0.5px solid var(--border)">
+      <p style="font-size:11px;color:var(--muted);line-height:1.6">⚠ Information reflects publicly available data as of March 2026. Rates and rules change frequently. Always verify with official customs authorities and a licensed broker. This is educational only — not legal or tax advice.</p>
+    </div>`;
+}
+showC('US',document.querySelector('#ctabs .ctab'));
+
+/* ═══════════════════════════════════════════════════
+   FACTORY DIRECTORY DATA
+═══════════════════════════════════════════════════ */
+const FACTORIES=[
+  {city:'Shenzhen',province:'Guangdong',cats:['electronics','industrial'],tags:['Electronics','PCBs','Smart devices','Drones'],badge:'db-visit',badgeText:'FTZ proximity',markets:[{name:'Huaqiangbei Electronics Market',desc:'World\'s largest electronics components market. 9 floors, 50,000+ vendors. Source everything from USB chips to complete phone assemblies. Beware: many are traders, not factories — verify.'},{name:'SEG Electronics Market',desc:'Premium electronics wholesale. More reliable supplier quality. Good for consumer electronics prototypes.'}],tips:['Arrive early — 9am for best prices before tourist crowds','Bring product samples and specification sheets — verbal descriptions waste time','Factory vs trader: ask for 营业执照 (business licence) and verify factory address is not the same as the wholesale market']},
+  {city:'Guangzhou',province:'Guangdong',cats:['clothing','beauty','jewelry','toys'],tags:['Clothing','Cosmetics','Wholesale markets','Auto parts'],badge:'db-visit',badgeText:'Canton Fair city',markets:[{name:'Guangzhou Garment District (Shahe)',desc:'Largest fashion wholesale market in South China. Thousands of booths, all price points. Best for fast fashion and basics.'},{name:'Huadu District',desc:'The jewelry capital of China. Gold, crystal, pearls, agates. Wholesale prices dramatically below retail.'}],tips:['Canton Fair held twice yearly (April & October) — Nexa can attend on your behalf','Guangzhou Fashion Week in March/September — brands showcase upcoming collections','Negotiation culture: first price is 40–60% above realistic. Start at 50% of ask.']},
+  {city:'Dongguan',province:'Guangdong',cats:['toys','electronics','clothing'],tags:['Toys','Furniture','Footwear','Hardware'],badge:'db-nexa',badgeText:'Nexa verified',markets:[{name:'Dongguan Toy City',desc:'Once produced ~30% of world\'s toys including Barbie dolls. Now expanding into educational and tech toys. Find factory-direct pricing.'},{name:'Humen Textile District',desc:'Major textile and garment production hub. Specialises in women\'s fashion at competitive MOQs.'}],tips:['Many toy factories here have moved up-market — don\'t assume cheap; quality ranges widely','Footwear cluster in Houjie Town — leather and synthetic shoes at all price points','Huawei, Vivo, Oppo all have facilities here — ecosystem supports electronics manufacturing too']},
+  {city:'Foshan',province:'Guangdong',cats:['homeware','industrial'],tags:['Ceramics','Furniture','Lighting','Aluminum'],badge:'db-nexa',badgeText:'Nexa verified',markets:[{name:'Foshan Ceramics Market',desc:'Ceramics capital of South China. Tiles, sanitary ware, decorative ceramics. Hundreds of showrooms in Nanhai District.'},{name:'Longjiang Furniture Town',desc:'Largest furniture production base in Guangdong. Factory showrooms open to trade buyers. Excellent for home/office furniture.'}],tips:['Foshan is 30min from Guangzhou by metro — easy day trip','Lighting cluster in Guzhen Town (Zhongshan, adjacent) hosts annual International Lighting Fair','Aluminum profiles and building materials cluster in Nanhai']},
+  {city:'Yiwu',province:'Zhejiang',cats:['homeware','toys','jewelry','clothing'],tags:['Small commodities','Holiday decor','Accessories','General wholesale'],badge:'db-visit',badgeText:'Must visit',markets:[{name:'Yiwu International Trade City',desc:'World\'s largest wholesale commodities market. 5 districts, 75,000+ booths, 1.8 million product lines. Everything from ribbons to robot toys.'},{name:'Yiwu Forest of Lights',desc:'Christmas and holiday decoration wholesale — 80% of world\'s Christmas ornaments sourced here.'}],tips:['Minimum orders are often just 1 carton — ideal for testing products','Most vendors have Alibaba stores — cross-reference to verify','Bring a translator or use Nexa — price negotiations require Mandarin','WeChat Pay and Alipay only — set up before visiting']},
+  {city:'Hangzhou',province:'Zhejiang',cats:['clothing','beauty'],tags:['Silk','Fast fashion','E-commerce','Luxury apparel'],badge:'db-nexa',badgeText:'Nexa verified',markets:[{name:'Sijiqing Clothing Market',desc:'China\'s largest clothing wholesale market. Open midnight–6am for the best deals. Fresh fashion arrivals daily from factories.'},{name:'China Silk City',desc:'Silk and textile wholesale hub. Raw silk, silk fabric, and finished silk products at factory-direct prices.'}],tips:['Sijiqing is a NIGHT market — the best deals are 1am–4am when factory deliveries arrive','Hangzhou\'s Taobao Village ecosystem means many small fashion factories are nearby','Silk quality varies enormously — Nexa can arrange fibre content testing']},
+  {city:'Ningbo',province:'Zhejiang',cats:['homeware','industrial','electronics'],tags:['Plastics','Moulds','Electrical','Port city'],badge:'db-visit',badgeText:'Major port',markets:[{name:'Yuyao Plastics City',desc:'"The Plastic City of China." Thousands of plastic product manufacturers. Household items, packaging, industrial plastics.'},{name:'Ningbo Raw Materials Market',desc:'Bulk industrial materials. Chemicals, rubber, metals. For brands building custom products.'}],tips:['Ningbo port is world\'s 3rd busiest — ideal staging point for sea freight','Yuyao (40min from Ningbo) has dedicated plastic industry clusters','Mould tooling (injection moulding) is available at much lower cost than Western countries']},
+  {city:'Danyang',province:'Jiangsu',cats:['optical'],tags:['Eyewear','Optical lenses','Frames','Sunglasses'],badge:'db-nexa',badgeText:'Hidden gem',markets:[{name:'Danyang Eyewear Market',desc:'Produces the majority of China\'s eyeglasses. Wholesale market directly in front of the train station — impossible to miss.'},{name:'Danyang International Optical Expo Centre',desc:'Trade shows and exhibitions for eyewear. Brands showcase new designs twice yearly.'}],tips:['80% of China\'s prescription eyeglass frames are made here','Sunglasses and fashion frames available from $0.50/unit at volume','OEM/ODM common — bring your design or choose from thousands of existing styles','CE/FDA certification for optical products — verify before EU/US import']},
+  {city:'Suzhou',province:'Jiangsu',cats:['electronics','clothing'],tags:['Silk','IT components','Circuit boards','Software'],badge:'db-visit',badgeText:'FTZ adjacent',markets:[{name:'Suzhou Industrial Park',desc:'High-tech manufacturing zone. Circuit boards, IT hardware, precision electronics. Many international brands have facilities here.'},{name:'Suzhou Silk Museum Area',desc:'Traditional silk production. Mulberry silk fabric at wholesale prices. OEM custom silk products.'}],tips:['ISO/CE/FDA certifications more common here than smaller hubs','40 min to Shanghai by high-speed rail — easy day sourcing trip from Shanghai FTZ','High-tech factories often require appointments and NDA — plan ahead']},
+  {city:'Zhongshan',province:'Guangdong',cats:['homeware'],tags:['Lighting','LED','Chandeliers','Smart lighting'],badge:'db-nexa',badgeText:'Category leader',markets:[{name:'Guzhen Lighting Market',desc:'Guzhen Town produces 70% of China\'s domestic lighting. Every type of lighting from fairy lights to commercial LED systems.'},{name:'International Lighting Fair (annual)',desc:'Held every October. Largest lighting trade show in Asia. Meet global manufacturers, negotiate annual contracts.'}],tips:['Guzhen has its own district entirely dedicated to lighting — walk in any direction from the main market','Smart/WiFi lighting is expanding rapidly here — great dropshipping opportunity','MOQs are low: most factories will do 50–100 units for first orders']},
+  {city:'Wenzhou',province:'Zhejiang',cats:['clothing','industrial'],tags:['Shoes','Leather goods','Lighters','Locks'],badge:'db-visit',badgeText:'Leather hub',markets:[{name:'Wenzhou Shoe Capital',desc:'One of China\'s largest footwear production hubs. Leather, synthetic, sport, and fashion shoes at all price points.'},{name:'Wenzhou Leather Goods Market',desc:'Bags, wallets, belts, and leather accessories. Many OEM-capable factories at competitive prices.'}],tips:['Bring authentic branded products to show quality level required — factories replicate as reference','Wenzhou also produces 70% of China\'s cigarette lighters and 80% of low-voltage electric switches','Leather quality inspection is crucial — Nexa QC recommended before bulk orders']},
+  {city:'Shantou',province:'Guangdong',cats:['toys'],tags:['Toys','Plastic toys','Remote control','Children\'s products'],badge:'db-visit',badgeText:'Toy capital',markets:[{name:'Chenghai Toy Market (near Shantou)',desc:'Chenghai District is the world\'s largest toy production base. Billions of toys shipped globally each year from this single district.'},{name:'Chenghai Toy Wholesale Centre',desc:'7-story wholesale building. Sample from thousands of toy manufacturers without factory visits.'}],tips:['Top Amazon toy sellers source heavily from Chenghai','ASTM F963 (US) and EN71 (EU) testing labs are available locally — use them','MOQs are genuinely low here — even 50 units possible for many categories','Seasonal: Chinese factories go dark 3 weeks around Chinese New Year — plan accordingly']},
+  {city:'Qingdao',province:'Shandong',cats:['clothing','homeware'],tags:['Textiles','Marine equipment','Beer/Food','Tyres'],badge:'db-visit',badgeText:'Northern hub',markets:[{name:'Qingdao Textile Market',desc:'Major textile and garment production in Northern China. Lower labor costs than Guangdong. Quality sportswear and workwear.'},{name:'Qingdao Port Area',desc:'One of China\'s top 5 ports. Ideal for bulk sea freight consolidation from Northern China suppliers.'}],tips:['Labor costs are 15–20% lower than Pearl River Delta factories','Port connectivity makes Qingdao ideal for combined sea freight + rail (Belt & Road routes to Europe)','Tyre and rubber manufacturing cluster in Shandong province — industrial buyers take note']},
+  {city:'Chengdu',province:'Sichuan',cats:['electronics','clothing'],tags:['Software','IT hardware','Western China hub','Growing consumer market'],badge:'db-nexa',badgeText:'Emerging hub',markets:[{name:'Chengdu Electronics City',desc:'Western China\'s largest electronics market. Lower prices than Shenzhen due to lower operating costs. Growing supplier base.'},{name:'Chengdu Wholesale Garment Market',desc:'Fashion manufacturing moving inland. Costs 20–30% lower than coastal factories.'}],tips:['Western China factories offer 20–30% lower labor costs than coastal cities','Government incentives for FDI here are aggressive — consider for manufacturing setup','China-Europe Railway Express passes through Chengdu — alternative to sea freight for EU markets (18–22 days)']},
+];
+
+function buildDir(filter){
+  const g=document.getElementById('dir_grid');
+  g.innerHTML='';
+  const items=filter==='all'?FACTORIES:FACTORIES.filter(f=>f.cats.includes(filter));
+  if(!items.length){g.innerHTML='<p style="color:var(--muted);font-size:14px;padding:2rem">No cities in this category yet. More coming soon.</p>';return;}
+  items.forEach(f=>{
+    const d=document.createElement('div');
+    d.className='dir-card';
+    d.innerHTML=`
+      <div class="dir-card-header">
+        <div class="dir-province">${f.province} Province</div>
+        <div class="dir-city">${f.city}</div>
+        <div class="dir-specialties">${f.tags.map(t=>`<span class="dir-tag">${t}</span>`).join('')}</div>
+        <span class="dir-badge ${f.badge}">${f.badgeText}</span>
+      </div>
+      <div class="dir-card-body">
+        ${f.markets.map(m=>`<div class="dir-market"><div class="dir-market-name">${m.name}</div><div class="dir-market-desc">${m.desc}</div></div>`).join('<hr style="border:none;border-top:0.5px solid var(--border);margin:0.75rem 0">')}
+        <div class="dir-tips">${f.tips.map(t=>`<div class="dir-tip">${t}</div>`).join('')}</div>
+      </div>`;
+    g.appendChild(d);
+  });
+}
+function filterD(cat,btn){
+  document.querySelectorAll('#dtabs .ctab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  buildDir(cat);
+}
+buildDir('all');
+</script>
+</body>
+</html>
